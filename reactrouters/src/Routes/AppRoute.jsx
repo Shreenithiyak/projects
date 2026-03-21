@@ -1,0 +1,35 @@
+import {Route, Routes } from "react-router-dom"
+import Createphase from "../pages/Createphase"
+import Updatephase from "../pages/Updatephase"
+import Introduction from "../pages/Introduction"
+import Dayy2 from "../Dayy2/Dayy2"
+import Day3 from "../Day3/Day3"
+import Day4_5 from "../Day4_5/Day4_5"
+import Day7_8 from "../Day7_8/Day7_8"
+import Upday1 from "../Upday1/Upday1"
+import Upday2 from "../Upday2/Upday2"
+import Upday3 from "../Upday3/Upday3"
+import Upday4 from "../Upday4/Upday4"
+const  AppRoute  = () => {
+  return (
+    <>
+    <Routes>
+      <Route path="/" element={<Introduction/>}/>
+      <Route path="/createphase" element={<Createphase/>}/>
+      <Route path="/updatephase" element={<Updatephase/>}/>
+      <Route path="/Dayy2" element={<Dayy2/>}/>
+      <Route path="/day3" element={<Day3/>}/>
+      <Route path="/day4_5" element={<Day4_5/>}/>
+      <Route path="/day7_8" element={<Day7_8/>}/>
+      <Route path="/upday1" element={<Upday1/>}/>
+      <Route path="/upday2" element={<Upday2/>}/>
+      <Route path="/upday3" element={<Upday3/>}/>
+       <Route path="/upday4" element={<Upday4/>}/>
+    </Routes>
+    
+    
+    </>
+  )
+}
+
+export default  AppRoute 
