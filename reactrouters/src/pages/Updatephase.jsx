@@ -17,16 +17,21 @@ const UpdatePhase = () => {
         Task 2
       </button>
 
-      
       <button onClick={() => navigate("/Upday3")} className="bg-red-500 text-white px-4 py-2" >
         Task 3
       </button>
 
-     
       <button onClick={() => navigate("/Upday4")} className="bg-purple-500 text-white px-4 py-2" >
         Task 4
       </button>
 
+      <button onClick={() => navigate("/recipe")} className="bg-pink-400 text-white px-4 py-2" >
+        Task 5
+      </button>
+
+      <button onClick={() => navigate("/core")} className="bg-neutral-400 text-white px-4 py-2" >
+        Task 6
+      </button>
     </div>
   )
 }

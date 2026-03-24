@@ -10,6 +10,8 @@ import Upday1 from "../Upday1/Upday1"
 import Upday2 from "../Upday2/Upday2"
 import Upday3 from "../Upday3/Upday3"
 import Upday4 from "../Upday4/Upday4"
+import Recipe from "../fetch/Recipe"
+import Core from "../fetch/core"
 const  AppRoute  = () => {
   return (
     <>
@@ -18,13 +20,15 @@ const  AppRoute  = () => {
       <Route path="/createphase" element={<Createphase/>}/>
       <Route path="/updatephase" element={<Updatephase/>}/>
       <Route path="/Dayy2" element={<Dayy2/>}/>
-      <Route path="/day3" element={<Day3/>}/>
+      <Route path="/day3"  element={<Day3/>}/>
       <Route path="/day4_5" element={<Day4_5/>}/>
       <Route path="/day7_8" element={<Day7_8/>}/>
       <Route path="/upday1" element={<Upday1/>}/>
       <Route path="/upday2" element={<Upday2/>}/>
       <Route path="/upday3" element={<Upday3/>}/>
-       <Route path="/upday4" element={<Upday4/>}/>
+      <Route path="/upday4" element={<Upday4/>}/>
+      <Route path="/recipe" element={<Recipe/>}/>
+      <Route path="/core" element={<Core/>}/>
     </Routes>
     
     
