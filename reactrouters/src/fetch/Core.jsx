@@ -1,10 +1,15 @@
+import {  useContext } from "react";
+import Create from "../Usecontext/Create";
 
 
 const Core = () => {
+   const {change,checkchange}=useContext(Create)
+
   return (
+    <>
     <div style={{ padding: "20px", lineHeight: "1.8" }}>
       <h1>Core Concepts Explanation</h1>
-
+     <button className={!change ? "bg-black text-white h-screen" : "bg-white text-black h-screen"}onClick={checkchange}>
       <p>
         1. Local Storage: Local storage is a browser feature used to store data
         permanently in the user's browser. Even if the page is refreshed or the
@@ -98,8 +103,12 @@ const Core = () => {
         languages and emojis) is displayed correctly. Example: fetching data from
         a URL using axios.
       </p>
-    </div>
-  );
+    
+     </button>
+     </div>
+   </>
+  )
+  
 };
 
 export default Core;

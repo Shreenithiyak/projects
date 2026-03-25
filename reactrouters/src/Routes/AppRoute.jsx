@@ -12,6 +12,9 @@ import Upday3 from "../Upday3/Upday3"
 import Upday4 from "../Upday4/Upday4"
 import Recipe from "../fetch/Recipe"
 import Core from "../fetch/Core"
+import Provider from "../Usecontext/Provider"
+import Toggle from "../Usecontext/Toggle"
+
 const  AppRoute  = () => {
   return (
     <>
@@ -28,7 +31,8 @@ const  AppRoute  = () => {
       <Route path="/upday3" element={<Upday3/>}/>
       <Route path="/upday4" element={<Upday4/>}/>
       <Route path="/recipe" element={<Recipe/>}/>
-      <Route path="/Core" element={<Core/>}/>
+      <Route path="/Core" element={<Provider><Core/></Provider>}/>
+      <Route path="/Toggle" element={<Provider><Toggle/></Provider>}/>
     </Routes>
     
     
