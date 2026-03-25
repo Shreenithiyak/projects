@@ -5,7 +5,7 @@ const UpdatePhase = () => {
   const navigate = useNavigate()
 
   return (
-    <div className="p-10 flex flex-col gap-6 items-center">
+    <div className="p-10 flex flex-col gap-6 items-center  bg-mauve-500 h-screen">
 
       <h1 className="text-2xl font-bold">Update phase</h1>
 
@@ -29,7 +29,7 @@ const UpdatePhase = () => {
         Task 5
       </button>
 
-      <button onClick={() => navigate("/core")} className="bg-neutral-400 text-white px-4 py-2" >
+      <button onClick={() => navigate("/Core")} className="bg-neutral-400 text-white px-4 py-2" >
         Task 6
       </button>
     </div>

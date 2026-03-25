@@ -6,7 +6,7 @@ const CreatePhase = () => {
   const navigate = useNavigate()
 
   return (
-    <div className="p-10 flex flex-col gap-6 items-center">
+    <div className="p-10 flex flex-col gap-6 items-center  bg-green-200 h-screen">
 
       <h1 className="text-2xl font-bold">Create Phase</h1>
 
