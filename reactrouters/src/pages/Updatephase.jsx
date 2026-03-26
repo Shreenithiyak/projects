@@ -6,7 +6,6 @@ const UpdatePhase = () => {
 
   return (
     <div className="p-10 flex flex-col gap-6 items-center  bg-mauve-500 h-screen">
-
       <h1 className="text-2xl font-bold">Update phase</h1>
 
       <button onClick={() => navigate("/Upday1")}  className="bg-blue-500 text-white px-4 py-2" >
@@ -34,6 +33,9 @@ const UpdatePhase = () => {
       </button>
       <button onClick={() => navigate("/Toggle")} className="bg-gray-600 text-white px-4 py-2" >
         Task 7
+      </button>
+      <button onClick={() => navigate("/Toggle")} className="bg-gray-600 text-white px-4 py-2" >
+        Task 8
       </button>
     </div>
   )
