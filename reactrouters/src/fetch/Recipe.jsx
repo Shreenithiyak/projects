@@ -31,10 +31,7 @@ useEffect(()=>{
           <p className="text-white">Loading...</p>
         ) : (
           data.map((e) => (
-            <div
-              key={e.id}
-              className="bg-amber-400 rounded-2xl flex flex-col gap-2 p-2 w-52 h-80"
-            >
+            <div  key={e.id}  className="bg-amber-400 rounded-2xl flex flex-col gap-2 p-2 w-52 h-80"  >
               <img src={e.image} className="w-full h-32 object-cover" alt="" />
 
               <h1 className="text-center font-bold">{e.name}</h1>

@@ -14,6 +14,8 @@ import Recipe from "../fetch/Recipe"
 import Core from "../fetch/Core"
 import Provider from "../Usecontext/Provider"
 import Toggle from "../Usecontext/Toggle"
+import Admin from "../Usecontext/Admin"
+import Profile from "../Usecontext/profile"
 
 const  AppRoute  = () => {
   return (
@@ -33,6 +35,8 @@ const  AppRoute  = () => {
       <Route path="/recipe" element={<Recipe/>}/>
       <Route path="/Core" element={<Provider><Core/></Provider>}/>
       <Route path="/Toggle" element={<Provider><Toggle/></Provider>}/>
+      <Route path="/admin" element={<Admin/>} />
+      <Route path="/profile" element={<Profile/>} />
     </Routes>
     
     
