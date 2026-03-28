@@ -32,11 +32,20 @@ const Toggle = () => {
  }, 2000);
 }
 
+const handle = useRef(0)
+
+ const handlechange=()=>{
+   handle.current++
+    console.log("check here",handle.current);
+ };
 
 
 
   return (
     <div className="flex flex-col items-center gap-6 mt-10">
+      <button onClick={handlechange} className="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600">
+        click here count store
+      </button>
       
       <h1 className="text-2xl font-bold">
         {lang === "EN" ? "Hello" : "Vanakkam"}
