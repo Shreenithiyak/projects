@@ -34,11 +34,17 @@ const UpdatePhase = () => {
       <button onClick={() => navigate("/Toggle")} className="bg-gray-600 text-white px-4 py-2" >
         Task 7
       </button>
-      <button onClick={() => navigate("/Toggle")} className="bg-gray-600 text-white px-4 py-2" >
+      <button onClick={() => navigate("/Toggle")} className="bg-orange-300 text-white px-4 py-2" >
         Task 8
       </button>
-      <button onClick={() => navigate("/Test")} className="bg-gray-600 text-white px-4 py-2" >
+      <button onClick={() => navigate("/Hoc")} className="bg-black text-white px-4 py-2" >
         Task 9
+      </button>
+      <button onClick={() => navigate("/Test")} className="bg-white text-black px-4 py-2" >
+        Task 10
+      </button>
+      <button onClick={() => navigate("/Withbutton")} className="bg-white text-black px-4 py-2" >
+        Task 11
       </button>
     </div>
   )

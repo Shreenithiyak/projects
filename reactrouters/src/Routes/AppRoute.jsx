@@ -17,6 +17,8 @@ import Toggle from "../Usecontext/Toggle"
 import Admin from "../Usecontext/Admin"
 import Profile from "../Usecontext/profile"
 import Test from "../Usecontext/Test"
+import Hoc from "../Usecontext/Hoc"
+import WithButton from "../Hoc component/withButton"
 
 const  AppRoute  = () => {
   return (
@@ -39,8 +41,9 @@ const  AppRoute  = () => {
       <Route path="/admin" element={<Admin/>} />
       <Route path="/profile" element={<Profile/>} />
       <Route path="/Test" element={<Test/>} />
+      <Route path="/Hoc" element={<Hoc/>} />
+      <Route path="/Withbutton" element={<WithButton/>} />
     </Routes>
-    
     
     </>
   )
