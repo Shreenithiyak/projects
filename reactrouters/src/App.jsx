@@ -13,6 +13,7 @@ const App = () => {
      <Link to="/" className="text-white">Introduction</Link>
       <Link to="/createphase" className="text-white">Create Phase</Link>
       <Link to="/updatephase" className="text-white">Update Phase</Link>
+      <Link to="/Optimizationphase" className="text-white">Optimization phase</Link>
     </div>
     </nav>
       <AppRoute/>

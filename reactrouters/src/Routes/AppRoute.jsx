@@ -2,6 +2,7 @@ import {Route, Routes } from "react-router-dom"
 import Createphase from "../pages/Createphase"
 import Updatephase from "../pages/Updatephase"
 import Introduction from "../pages/Introduction"
+import Optimizationphase from "../pages/Optimizationphase"
 import Dayy2 from "../Dayy2/Dayy2"
 import Day3 from "../Day3/Day3"
 import Day4_5 from "../Day4_5/Day4_5"
@@ -19,6 +20,8 @@ import Profile from "../Usecontext/profile"
 import Test from "../Usecontext/Test"
 import Hoc from "../Usecontext/Hoc"
 import WithButton from "../Hoc component/withButton"
+import Task1 from "../Usememo/Task1"
+
 
 const  AppRoute  = () => {
   return (
@@ -27,6 +30,7 @@ const  AppRoute  = () => {
       <Route path="/" element={<Introduction/>}/>
       <Route path="/createphase" element={<Createphase/>}/>
       <Route path="/updatephase" element={<Updatephase/>}/>
+      <Route path="/Optimizationphase" element={<Optimizationphase/>}/>
       <Route path="/Dayy2" element={<Dayy2/>}/>
       <Route path="/day3"  element={<Day3/>}/>
       <Route path="/day4_5" element={<Day4_5/>}/>
@@ -42,7 +46,8 @@ const  AppRoute  = () => {
       <Route path="/profile" element={<Profile/>} />
       <Route path="/Test" element={<Test/>} />
       <Route path="/Hoc" element={<Hoc/>} />
-      <Route path="/Withbutton" element={<WithButton/>} />
+      <Route path="/Withbutton" element={<WithButton/>}/>
+      <Route path="/Task1" element={<Task1/>}/>
     </Routes>
     
     </>
