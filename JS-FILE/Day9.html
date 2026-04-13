@@ -1,0 +1,66 @@
+<!-- // Create a number display and three buttons:
+// Increase
+// Decrease
+// Reset
+// When clicking the buttons, update the number accordingly -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM MODEL</title>
+</head>
+<body>
+    <button id="btn">Increace</button>
+    <button id="dec">Decreace</button>
+    <button id="re">Reset</button>
+    <p id="num">0</p>
+    <button id="darkbtn">Toggle</button>
+
+    <script>
+      
+      let count=0;
+        const btn=document.getElementById("btn");
+         const dec= document.getElementById("dec");
+         const re=document.getElementById("re");
+        const num=document.getElementById("num");
+        const darkbtn=document.getElementById("darkbtn");
+        
+        btn.addEventListener("click",()=>{
+        count++;
+        num.textContent=count;
+        });
+     
+       dec.addEventListener("click",()=>{
+        count--;
+        num.textContent=count;
+       });
+      re.addEventListener("click",()=>{
+        count=0;
+        num.textContent=count;
+       });
+       darkbtn.addEventListener("click",()=>{
+        document.body.style.backgroundColor=("black");
+        
+       });
+    
+
+    </script>
+     
+
+
+</body>
+</html>
+
+<!-- Create an input box and a button.
+When the user types something and clicks the button:
+Add the text as a new <li> inside a <ul>. -->
+
+
+
+<!-- Add a delete button next to each list item.
+When clicking delete:
+Remove that specific list item from the DOM. -->
+
+
+
