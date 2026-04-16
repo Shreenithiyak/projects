@@ -1,4 +1,5 @@
 export const movieCreate = (req, res) => {
+    console.log(req);
 
   const { id, movieName, movieCat, hero, herion } = req.body;
 
@@ -16,7 +17,7 @@ export const movieCreate = (req, res) => {
       msg: "Successfully Added",
       sendData: datanew
     });
-    console.log(datanew);
+    // console.log(datanew);
 
   } catch (error) {
     console.log("Error", error);
@@ -32,7 +33,7 @@ export const moviegetbyParams = (req, res) => {
   const id = req.params.id;
 
   res.json({msg: "Params received",id: id });
- console.log(id);
+//  console.log(id);
 };
 
 // GET → query
@@ -41,7 +42,7 @@ export const movieFilter = (req, res) => {
   const { movieCat } = req.query;
 
   res.json({msg: "Query received",category: movieCat});
-console.log(movieCat);
+// console.log(movieCat);
 };
 
 // GET → headers
@@ -50,5 +51,5 @@ export const movieToken = (req, res) => {
   const token = req.headers.authorization;
 
   res.json({msg: "Token received",token: token });
-console.log(token);
+// console.log(token);
 };
