@@ -22,7 +22,7 @@ import Hoc from "../Usecontext/Hoc"
 import WithButton from "../Hoc component/withButton"
 import Task1 from "../Usememo/Task1"
 import Task2 from "../Usememo/Task2"
-
+import Task3 from "../Usememo/render"
 
 const  AppRoute  = () => {
   return (
@@ -50,6 +50,7 @@ const  AppRoute  = () => {
       <Route path="/Withbutton" element={<WithButton/>}/>
       <Route path="/Task1" element={<Task1/>}/>
       <Route path="/Task2" element={<Task2/>}/>
+      <Route path="/Task3" element={<Task3/>}/>
     </Routes>
     
     </>
