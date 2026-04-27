@@ -12,6 +12,8 @@ const Optimizationphase = () => {
     <button onClick = {()=>navigate("/Task1")}className="px-4 py-2 text-white bg-green-500">Task1 </button>
 <button onClick = {()=>navigate("/Task2")}className="px-4 py-2 text-white bg-green-500">Task2 </button>
 <button onClick = {()=>navigate("/Task3")}className="px-4 py-2 text-white bg-green-500">Task3 </button>
+<button onClick = {()=>navigate("/Task4")}className="px-4 py-2 text-white bg-green-500">Task4 </button>
+     
      </div>
   
     </>
