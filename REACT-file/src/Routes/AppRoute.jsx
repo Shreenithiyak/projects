@@ -24,6 +24,7 @@ import Task1 from "../Usememo/Task1"
 import Task2 from "../Usememo/Task2"
 import Task3 from "../Usememo/render"
 import LazyLoading from "../Usememo/lazyloading"
+import RedirectRoute from "../Redirect/Redirectroute";
 
 
 const  AppRoute  = () => {
@@ -52,8 +53,8 @@ const  AppRoute  = () => {
       <Route path="/Withbutton" element={<WithButton/>}/>
       <Route path="/Task1" element={<Task1/>}/>
       <Route path="/Task2" element={<Task2/>}/>
-      <Route path="/Task3" element={<Task3/>}/>
-      <Route path="/lazyloading" element={<LazyLoading/>}/>
+      <Route path="/Task3/*" element={<Task3/>}/>
+      <Route path="/Task4/*" element={<RedirectRoute/>}/>
     </Routes>
     
     </>

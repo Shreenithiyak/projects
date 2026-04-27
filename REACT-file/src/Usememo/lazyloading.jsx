@@ -1,207 +1,194 @@
-import { useContext, useReducer, useState, lazy, Suspense } from "react";
-import { cartInitialState, cartReducer } from "./cartContext";
-import { AuthContext } from "./authContext";
-import { Routes, Route, useNavigate, Navigate, Link } from "react-router-dom";
+import React, { createContext, useContext, useReducer, useState } from "react";
+import { Routes, Route, Link, Navigate, useNavigate } from "react-router-dom";
 
-// ==================== THEME CONTEXT (Task 1) ====================
-import { createContext } from "react";
+/* ================= THEME CONTEXT ================= */
 const ThemeContext = createContext();
 
 const themeReducer = (state, action) => {
-  switch (action.type) {
-    case 'TOGGLE_THEME': return { ...state, mode: state.mode === 'light' ? 'dark' : 'light' };
-    default: return state;
+  if (action.type === "TOGGLE_THEME") {
+    return state === "light" ? "dark" : "light";
   }
+  return state;
 };
 
 const ThemeProvider = ({ children }) => {
-  const savedTheme = localStorage.getItem('theme') || 'light';
-  const [state, dispatch] = useReducer(themeReducer, { mode: savedTheme });
-  
-  const toggleTheme = () => dispatch({ type: 'TOGGLE_THEME' });
-  
-  // Save to localStorage
-  localStorage.setItem('theme', state.mode);
-  
+  const [theme, dispatch] = useReducer(themeReducer, "light");
+
   return (
-    <ThemeContext.Provider value={{ theme: state.mode, toggleTheme }}>
-      <div className={state.mode === 'dark' ? 'bg-gray-900 text-white' : 'bg-white text-black'}>
+    <ThemeContext.Provider
+      value={{
+        theme,
+        toggleTheme: () => dispatch({ type: "TOGGLE_THEME" }),
+      }}
+    >
+      <div className={theme === "dark" ? "bg-black text-white min-h-screen" : "bg-white text-black min-h-screen"}>
         {children}
       </div>
     </ThemeContext.Provider>
   );
 };
 
-// ...existing code...
-
-// ==================== AUTH CONTEXT + REDUCER (Task 3) ====================
-// ...existing code...
-
-// const authInitialState = { user: null, isLoggedIn: false };
-const authReducer = (state, action) => {
-  switch (action.type) {
-    case 'LOGIN': return { user: action.payload, isLoggedIn: true };
-    case 'LOGOUT': return { user: null, isLoggedIn: false };
-    default: return state;
-  }
-};
+/* ================= AUTH CONTEXT ================= */
+const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  const savedUser = JSON.parse(localStorage.getItem('user')) || null;
-  const [state, dispatch] = useReducer(authReducer, { user: savedUser, isLoggedIn: !!savedUser });
-  
-  const login = (userData) => {
-    dispatch({ type: 'LOGIN', payload: userData });
-    localStorage.setItem('user', JSON.stringify(userData));
-  };
-  
-  const logout = () => {
-    dispatch({ type: 'LOGOUT' });
-    localStorage.removeItem('user');
-  };
-  
+  const [user, setUser] = useState(null);
+
+  const login = (name) => setUser({ name });
+  const logout = () => setUser(null);
+
   return (
-    <AuthContext.Provider value={{ ...state, login, logout }}>
+    <AuthContext.Provider value={{ user, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
 };
 
-// ==================== LAZY LOADED PAGES ====================
-const Home = lazy(() => import('./Home'));
-const About = lazy(() => import('./About'));
-const Dashboard = lazy(() => import('./Dashboard'));
+/* ================= PAGES ================= */
 
-// ==================== PAGE COMPONENTS ====================
-const HomePage = () => (
-  <div className="p-10 text-center">
-    <h1 className="text-3xl font-bold">🏠 Home Page</h1>
-    <p>Welcome to the lazy loaded app!</p>
-  </div>
+const Home = () => (
+  <h1 className="text-2xl p-5">🏠 Home Page</h1>
 );
 
-const AboutPage = () => (
-  <div className="p-10 text-center">
-    <h1 className="text-3xl font-bold">ℹ️ About Page</h1>
-    <p>This page is loaded on demand!</p>
-  </div>
+const About = () => (
+  <h1 className="text-2xl p-5">ℹ️ About Page</h1>
 );
 
-const DashboardPage = () => {
-  const { user, logout } = useContext(AuthContext);
-  const [cartState, cartDispatch] = useReducer(cartReducer, cartInitialState);
-  const [newItem, setNewItem] = useState({ name: '', price: '' });
-  
-  const handleAddItem = () => {
-    if (newItem.name && newItem.price) {
-      cartDispatch({ type: 'ADD_ITEM', payload: { id: Date.now(), name: newItem.name, price: parseFloat(newItem.price) } });
-      setNewItem({ name: '', price: '' });
-    }
-  };
-  
-  return (
-    <div className="p-10">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold">📊 Dashboard</h1>
-        <button onClick={logout} className="px-4 py-2 bg-red-500 text-white rounded">Logout</button>
-      </div>
-      <p className="mb-4">Welcome, <strong>{user?.name}</strong>!</p>
-      
-      {/* Cart System */}
-      <div className="border p-4 rounded mb-6">
-        <h2 className="text-xl font-bold mb-4">🛒 Cart System</h2>
-        <div className="flex gap-2 mb-4">
-          <input type="text" placeholder="Item name" value={newItem.name} onChange={(e) => setNewItem({ ...newItem, name: e.target.value })} className="border p-2 rounded" />
-          <input type="number" placeholder="Price" value={newItem.price} onChange={(e) => setNewItem({ ...newItem, price: e.target.value })} className="border p-2 rounded w-24" />
-          <button onClick={handleAddItem} className="px-4 py-2 bg-green-500 text-white rounded">Add</button>
-          <button onClick={() => cartDispatch({ type: 'CLEAR_CART' })} className="px-4 py-2 bg-gray-500 text-white rounded">Clear</button>
-        </div>
-        <ul className="mb-4">
-          {cartState.items.map((item, index) => (
-            <li key={item.id} className="flex justify-between items-center border-b py-2">
-              <span>{item.name} - ${item.price}</span>
-              <button onClick={() => cartDispatch({ type: 'REMOVE_ITEM', payload: index })} className="px-2 py-1 bg-red-500 text-white rounded text-sm">Remove</button>
-            </li>
-          ))}
-        </ul>
-        <p className="text-xl font-bold">Total: ${cartState.totalPrice}</p>
-        <p className="text-sm text-gray-500">Cart Count: {cartState.items.length}</p>
-      </div>
-    </div>
-  );
-};
-
-const LoginPage = () => {
+const Login = () => {
+  const [name, setName] = useState("");
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
-  const [name, setName] = useState('');
-  
-  const handleLogin = (e) => {
-    e.preventDefault();
-    if (name.trim()) {
-      login({ name });
-      navigate('/dashboard');
+
+  const handleLogin = () => {
+    if (name) {
+      login(name);
+      navigate("/dashboard");
     }
   };
-  
+
   return (
-    <div className="p-10 text-center">
-      <h1 className="text-3xl font-bold mb-6">🔐 Login</h1>
-      <form onSubmit={handleLogin} className="flex flex-col gap-4 max-w-sm mx-auto">
-        <input type="text" placeholder="Enter your name" value={name} onChange={(e) => setName(e.target.value)} className="border p-2 rounded" />
-        <button type="submit" className="px-4 py-2 bg-blue-500 text-white rounded">Login</button>
-      </form>
+    <div className="p-5">
+      <input
+        type="text"
+        placeholder="Enter Name"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        className="border p-2"
+      />
+      <button onClick={handleLogin} className="bg-blue-500 text-white px-4 py-2 ml-2">
+        Login
+      </button>
     </div>
   );
 };
 
-// ==================== PROTECTED ROUTE ====================
-const ProtectedRoute = ({ children }) => {
-  const { isLoggedIn } = useContext(AuthContext);
-  return isLoggedIn ? children : <Navigate to="/login" />;
+const Dashboard = () => {
+  const { user, logout } = useContext(AuthContext);
+
+  const [cart, setCart] = useState([]);
+  const [item, setItem] = useState("");
+
+  const addItem = () => {
+    if (item) {
+      setCart([...cart, item]);
+      setItem("");
+    }
+  };
+
+  const removeItem = (index) => {
+    setCart(cart.filter((_, i) => i !== index));
+  };
+
+  return (
+    <div className="p-5">
+      <h1 className="text-2xl">Welcome {user?.name}</h1>
+
+      <button onClick={logout} className="bg-red-500 text-white px-4 py-2 my-3">
+        Logout
+      </button>
+
+      <div>
+        <input
+          type="text"
+          placeholder="Add Item"
+          value={item}
+          onChange={(e) => setItem(e.target.value)}
+          className="border p-2"
+        />
+
+        <button onClick={addItem} className="bg-green-500 text-white px-4 py-2 ml-2">
+          Add
+        </button>
+      </div>
+
+      <ul className="mt-4">
+        {cart.map((product, index) => (
+          <li key={index}>
+            {product}
+            <button
+              onClick={() => removeItem(index)}
+              className="bg-red-400 text-white px-2 ml-2"
+            >
+              Remove
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 };
 
-// ==================== MAIN APP ====================
-const LazyLoading = () => {
+/* ================= PROTECTED ROUTE ================= */
+
+const ProtectedRoute = ({ children }) => {
+  const { user } = useContext(AuthContext);
+
+  return user ? children : <Navigate to="/login" />;
+};
+
+/* ================= MAIN APP ================= */
+
+const AppContent = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);
-  
+
   return (
-    <div className="min-h-screen">
-      {/* Navigation */}
-      <nav className="flex justify-between items-center p-4 bg-gray-800 text-white">
-        <div className="flex gap-4">
-          <Link to="/home" className="hover:text-green-400">Home</Link>
-          <Link to="/about" className="hover:text-green-400">About</Link>
-          <Link to="/dashboard" className="hover:text-green-400">Dashboard</Link>
-        </div>
-        <button onClick={toggleTheme} className="px-4 py-2 bg-yellow-500 text-black rounded">
-          {theme === 'light' ? '🌙 Dark' : '☀️ Light'}
+    <>
+      <nav className="flex gap-4 p-4 bg-gray-800 text-white">
+        <Link to="/">Home</Link>
+        <Link to="/about">About</Link>
+        <Link to="/dashboard">Dashboard</Link>
+
+        <button onClick={toggleTheme} className="ml-auto bg-yellow-400 px-3 text-black">
+          {theme === "light" ? "Dark" : "Light"}
         </button>
       </nav>
-      
-      {/* Routes with Suspense */}
-      <Suspense fallback={<div className="p-10 text-center">Loading...</div>}>
-        <Routes>
-          <Route path="/home" element={<HomePage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/dashboard" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
-          <Route path="*" element={<Navigate to="/home" />} />
-        </Routes>
-      </Suspense>
-    </div>
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/login" element={<Login />} />
+
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+    </>
   );
 };
 
-// ==================== ROOT APP ====================
-const App = () => {
+/* ================= ROOT APP ================= */
+
+export default function App() {
   return (
     <AuthProvider>
       <ThemeProvider>
-        <LazyLoading />
+        <AppContent />
       </ThemeProvider>
     </AuthProvider>
   );
-};
-
-export default App;
+}
